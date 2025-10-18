@@ -1,0 +1,73 @@
+Write-Host "=============================================="
+Write-Host "Setting up your local environment..."
+Write-Host "=============================================="
+Write-Host ""
+
+# --- Check if Node.js is installed ---
+if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
+    Write-Host "[ERROR] Node.js is not installed." -ForegroundColor Red
+    Write-Host "Please install it from https://nodejs.org/"
+    Pause
+    exit 1
+}
+
+# --- Automatically copy all template/example files ---
+Write-Host "Copying template files..."
+Get-ChildItem -Recurse -Include "*.template.json", "*.example" | ForEach-Object {
+    $target = $_.FullName `
+        -replace "\.template\.json$", ".json" `
+        -replace "\.example$", ""
+    if (-not (Test-Path $target)) {
+        Copy-Item $_.FullName $target
+        Write-Host "Created $($target) from $($_.Name)"
+    }
+    else {
+        Write-Host "$($target) already exists. Skipping."
+    }
+}
+
+Write-Host ""
+Write-Host "Creating environment files if missing..."
+
+$devEnvPath = ".env.development"
+$prodEnvPath = ".env.production"
+
+if (-not (Test-Path $devEnvPath)) {
+    @"
+# Development Environment
+NODE_ENV=development
+VITE_STORAGE_MODE=
+VITE_LOCAL_API=
+"@ | Out-File -Encoding utf8 $devEnvPath
+    Write-Host "Created $devEnvPath with empty values."
+} else {
+    Write-Host "$devEnvPath already exists. Skipping."
+}
+
+if (-not (Test-Path $prodEnvPath)) {
+    @"
+# Production Environment
+NODE_ENV=production
+VITE_STORAGE_MODE=
+VITE_AWS_API=
+VITE_S3_BUCKET_URL=
+"@ | Out-File -Encoding utf8 $prodEnvPath
+    Write-Host "Created $prodEnvPath with empty values."
+} else {
+    Write-Host "$prodEnvPath already exists. Skipping."
+}
+
+Write-Host ""
+if (-not (Test-Path "node_modules")) {
+    Write-Host "Installing npm dependencies..."
+    npm install
+}
+else {
+    Write-Host "node_modules folder already exists. Skipping npm install."
+}
+
+Write-Host ""
+Write-Host "=============================================="
+Write-Host "Setup complete! You can now run the project."
+Write-Host "=============================================="
+Pause
