@@ -9,7 +9,6 @@ export default function ELibrary() {
   const [books, setBooks] = useState<EBook[]>([]);
 
   useEffect(() => {
-    // StorageService.list().then(setBooks);
     setTimeout(() => setBooks(mockBooks), 500);
   }, []);
 

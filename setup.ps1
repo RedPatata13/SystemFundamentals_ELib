@@ -58,9 +58,7 @@ VITE_S3_BUCKET_URL=
 Write-Host ""
 if (-not (Test-Path "node_modules")) {
     Write-Host "Installing npm dependencies..."
-    npm install -g yarn
-    yarn install
-}
+    npm install
 else {
     Write-Host "node_modules folder already exists. Skipping npm install."
 }
