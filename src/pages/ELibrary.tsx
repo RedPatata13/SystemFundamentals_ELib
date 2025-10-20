@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 // import StorageService from '../services';
 import type { EBook } from '../services/types';
 import { mockBooks } from '../services/mockData';
+import { ThemeProvider } from '../components/theme-provider';
+import { ModeToggle } from '../components/mode-toggle';
 
 export default function ELibrary() {
   const [books, setBooks] = useState<EBook[]>([]);
@@ -13,11 +15,13 @@ export default function ELibrary() {
 
   return (
     <div style={{ padding: 20 }}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      { <ModeToggle /> }
+    </ThemeProvider>
       <h1>E-Library</h1>
       <ul>
         {books.map((b) => (
           <li key={b.key} style={{ marginBottom: 8 }}>
-            {/* Use the URL if it exists; fallback to # */}
             <a
               href={b.url}
               target="_blank"

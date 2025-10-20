@@ -3,7 +3,6 @@ Write-Host "Setting up your local environment..."
 Write-Host "=============================================="
 Write-Host ""
 
-# --- Check if Node.js is installed ---
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
     Write-Host "[ERROR] Node.js is not installed." -ForegroundColor Red
     Write-Host "Please install it from https://nodejs.org/"
@@ -11,7 +10,6 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-# --- Automatically copy all template/example files ---
 Write-Host "Copying template files..."
 Get-ChildItem -Recurse -Include "*.template.json", "*.example" | ForEach-Object {
     $target = $_.FullName `
@@ -60,7 +58,8 @@ VITE_S3_BUCKET_URL=
 Write-Host ""
 if (-not (Test-Path "node_modules")) {
     Write-Host "Installing npm dependencies..."
-    npm install
+    npm install -g yarn
+    yarn install
 }
 else {
     Write-Host "node_modules folder already exists. Skipping npm install."
