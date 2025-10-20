@@ -59,7 +59,6 @@ Write-Host ""
 if (-not (Test-Path "node_modules")) {
     Write-Host "Installing dependencies..."
 
-    # Check if Yarn is installed
     if (-not (Get-Command yarn -ErrorAction SilentlyContinue)) {
         Write-Host "Yarn not found. Installing globally via npm..."
         try {
@@ -73,7 +72,6 @@ if (-not (Test-Path "node_modules")) {
         Write-Host "Yarn is already installed."
     }
 
-    # Run yarn install
     try {
         Write-Host "Running 'yarn install'..."
         yarn install
