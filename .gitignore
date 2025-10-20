@@ -36,4 +36,5 @@ dist-ssr
 .DS_Store
 Thumbs.db
 
-
+#shadcn setup
+components.json
