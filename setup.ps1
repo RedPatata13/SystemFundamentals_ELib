@@ -57,13 +57,42 @@ VITE_S3_BUCKET_URL=
 
 Write-Host ""
 if (-not (Test-Path "node_modules")) {
-    Write-Host "Installing npm dependencies..."
-    npm install
-    npx shadcn@latest init
+    Write-Host "Installing dependencies..."
+
+    # Check if Yarn is installed
+    if (-not (Get-Command yarn -ErrorAction SilentlyContinue)) {
+        Write-Host "Yarn not found. Installing globally via npm..."
+        try {
+            npm install -g yarn
+            Write-Host "Yarn installed successfully."
+        } catch {
+            Write-Host "[ERROR] Failed to install Yarn. Please check your npm setup." -ForegroundColor Red
+            exit 1
+        }
+    } else {
+        Write-Host "Yarn is already installed."
+    }
+
+    # Run yarn install
+    try {
+        Write-Host "Running 'yarn install'..."
+        yarn install
+    } catch {
+        Write-Host "[ERROR] Failed to run 'yarn install'. Make sure you are in a valid project directory." -ForegroundColor Red
+        exit 1
+    }
+
+    try {
+        Write-Host "Setting up ShadCn"
+        npx shadcn@latest init
+    } catch {
+        Write-Host "[ERROR] Failed to run 'npx shadcn@latest init'."
+        exit 1
+    }
+} else {
+    Write-Host "node_modules folder already exists. Skipping dependency installation."
 }
-else {
-    Write-Host "node_modules folder already exists. Skipping npm install."
-}
+
 
 Write-Host ""
 Write-Host "=============================================="
