@@ -59,6 +59,7 @@ Write-Host ""
 if (-not (Test-Path "node_modules")) {
     Write-Host "Installing npm dependencies..."
     npm install
+    npx shadcn@latest init
 else {
     Write-Host "node_modules folder already exists. Skipping npm install."
 }
