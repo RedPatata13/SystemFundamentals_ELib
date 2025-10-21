@@ -1,5 +1,7 @@
 import { useEffect } from "react"
-import ELibrary from "./pages/ELibrary"
+// import ELibrary from "./pages/ELibrary"
+// import Layout from "./components/func-sidebar"
+import { Header } from "./components/header"
 
 function App() {
   useEffect(() => {
@@ -11,7 +13,7 @@ function App() {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <ELibrary />
+      <Header />
     </div>
   )
 }
