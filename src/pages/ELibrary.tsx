@@ -1,36 +1,27 @@
 import { useEffect, useState } from 'react';
-// import StorageService from '../services';
 import type { EBook } from '../services/types';
 import { mockBooks } from '../services/mockData';
-// import { ThemeProvider } from '../components/theme-provider';
-// import { ModeToggle } from '../components/mode-toggle';
+import { EbookTileSimple } from '../components/ebook-simple';
 
 export default function ELibrary() {
   const [books, setBooks] = useState<EBook[]>([]);
 
   useEffect(() => {
+    // simulate async loading
     setTimeout(() => setBooks(mockBooks), 500);
   }, []);
 
   return (
     <div style={{ padding: 20 }}>
+      {/* <h1>E-Library</h1> */}
+      <br />
+      <div className='flex gap-4'>
+        {books.map((b, i) => {
+        console.log("EBook URL:", b.url);
+        return <EbookTileSimple ebook={b} key={b.key || b.id || b.url || i} />;
+      })}
+      </div>
       
-      <h1>E-Library</h1>
-      <ul>
-        {books.map((b) => (
-          <li key={b.key} style={{ marginBottom: 8 }}>
-            <a
-              href={b.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: 'underline', color: 'blue' }}
-            >
-              {b.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <p>Works</p>
     </div>
   );
 }
