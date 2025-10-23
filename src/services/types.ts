@@ -5,3 +5,7 @@ export interface EBook {
   size?: number;
   url?: string;
 }
+
+export interface LayoutContext {
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+}

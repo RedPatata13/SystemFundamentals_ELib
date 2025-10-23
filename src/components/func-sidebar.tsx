@@ -1,14 +1,27 @@
-import { SidebarProvider, SidebarTrigger } from "./ui/sidebar"
 import { AppSidebar } from "./app-sidebar"
-
-export default function SidebarMain({ children }: { children: React.ReactNode }) {
+import NavText from "./nav-text"
+import { ThemeProvider } from "./theme-provider"
+import { ModeToggle } from "./mode-toggle"
+import { SearchButton } from "./search-button"
+export default function SidebarMain({ children, head }: { children: React.ReactNode, head: string }) {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main>
-        <SidebarTrigger />
+    <div className="flex flex-col min-h-screen w-full overflow-y-hidden">
+      <header className="flex items-center border-b h-14 justify-between">
+        <div className="flex gap-1 items-center">
+          <AppSidebar /> 
+          <NavText />
+        </div>
+        <div className="flex items-center gap-2">
+            <ThemeProvider>
+            <ModeToggle />
+            </ThemeProvider>
+            <SearchButton />
+        </div>
+      </header>
+      
+      <main className="flex-1 overflow-y-hidden p-4">
         {children}
       </main>
-    </SidebarProvider>
+    </div>
   )
 }

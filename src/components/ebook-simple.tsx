@@ -37,13 +37,17 @@ export function EbookTileSimple({ ebook }: { ebook: EBook }) {
 
     renderCover();
   }, [ebook.url]);
+  const truncateText = (text: string, maxLength: number): string => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  };
 
   return (
-  <div className="flex flex-col items-center gap-2 w-[300px]">
+  <div className="flex flex-col items-center gap-2 w-[200px]">
     <div 
       className="w-full bg-gray-200 flex items-center justify-center rounded-lg drop-shadow-lg overflow-hidden relative group"
       style={{ 
-        aspectRatio: '3/4'
+        aspectRatio: '1/1.4'
       }}
     >
       <canvas 
@@ -62,8 +66,8 @@ export function EbookTileSimple({ ebook }: { ebook: EBook }) {
         </div>
       )}
     </div>
-    <span className="text-center text-sm font-medium truncate w-full">
-      {ebook.title}
+    <span className="text-center text-sm font-medium w-full max-w-[40ch]">
+       {truncateText(ebook.title, 100)} 
     </span>
   </div>
 );
