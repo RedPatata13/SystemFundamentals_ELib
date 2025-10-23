@@ -1,15 +1,12 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import type { EBook } from '../services/types';
-import { mockBooks } from '../services/mockData';
+// import { mockBooks } from '../services/mockData';
 import { EbookTileSimple } from '../components/ebook-simple';
 
-export default function ELibrary() {
-  const [books, setBooks] = useState<EBook[]>([]);
-
-  useEffect(() => {
-    // simulate async loading
-    setTimeout(() => setBooks(mockBooks), 500);
-  }, []);
+interface ELibraryProps{
+  books: EBook[];
+}
+export default function ELibrary({ books} : ELibraryProps) {
 
   return (
     <div style={{ padding: 20 }}>
@@ -18,7 +15,7 @@ export default function ELibrary() {
       <div className='flex gap-4'>
         {books.map((b, i) => {
         console.log("EBook URL:", b.url);
-        return <EbookTileSimple ebook={b} key={b.key || b.id || b.url || i} />;
+        return <EbookTileSimple ebook={b} key={b.key || b.url || i} />;
       })}
       </div>
       

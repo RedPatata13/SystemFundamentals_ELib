@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { File } from "lucide-react";
+// import { File } from "lucide-react";
 import type { EBook } from "./types";
 
 // Optional: Set workerSrc for react-pdf

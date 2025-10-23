@@ -41,7 +41,7 @@ export function EbookTileSimple({ ebook }: { ebook: EBook }) {
   return (
   <div className="flex flex-col items-center gap-2 w-[300px]">
     <div 
-      className="w-full bg-gray-200 flex items-center justify-center rounded-lg shadow overflow-hidden relative group"
+      className="w-full bg-gray-200 flex items-center justify-center rounded-lg drop-shadow-lg overflow-hidden relative group"
       style={{ 
         aspectRatio: '3/4'
       }}

@@ -1,21 +1,33 @@
-import { useEffect } from "react"
-// import ELibrary from "./pages/ELibrary"
-// import Layout from "./components/func-sidebar"
-import { Header } from "./components/header"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AppLayout from "./AppLayout";
+import ELibrary from "./pages/ELibrary";
+import Dashboard from "./pages/hello1";
+import { useEffect, useState } from "react";
+import type { EBook } from "./services/types";
+import { mockBooks } from "./services/mockData";
 
-function App() {
+export default function App() {
+  const [books, setBooks] = useState<EBook[]>([]);
+
   useEffect(() => {
-    const overlay = document.getElementById("loading-overlay")
-    const root = document.getElementById("root")
-    if (overlay) overlay.style.display = "none"
-    if (root) root.style.display = "block"
-  }, [])
+    const overlay = document.getElementById("loading-overlay");
+    const root = document.getElementById("root");
+    if (overlay) overlay.style.display = "none";
+    if (root) root.style.display = "block";
+    
+    
+    setTimeout(() => setBooks(mockBooks), 500);
+  }, []);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <Header />
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<ELibrary books={books} />} />
+          <Route path="/students" element={<Dashboard />} />
+          {/* <Route path="/settings" element={<Settings />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App
