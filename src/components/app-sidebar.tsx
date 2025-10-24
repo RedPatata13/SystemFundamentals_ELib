@@ -8,7 +8,7 @@ import {
 import { Button } from "./ui/button"
 
 const items = [
-  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Dashboard", url: "/hello1", icon: Home },
   { title: "Inbox", url: "/students", icon: Inbox },
   { title: "Library", url: "/Library", icon: Calendar },
   { title: "Collection", url: "/Collection", icon: Search },

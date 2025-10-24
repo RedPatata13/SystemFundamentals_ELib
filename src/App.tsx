@@ -7,6 +7,8 @@ import type { EBook } from "./services/types";
 import { mockBooks } from "./services/mockData";
 import Account from "./pages/account";
 import Collection from "./pages/collections";
+import Login from "./pages/login";
+import PDFViewerPage from "./pages/hello1";
 
 export default function App() {
   const [books, setBooks] = useState<EBook[]>([]);
@@ -24,15 +26,17 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Login/>} />
         <Route element={<AppLayout />}>
-          <Route path="/" element={<ELibrary books={books} />} />
-          <Route path="/students" element={<Dashboard />} />
+          <Route path="/hello1" element={<PDFViewerPage />} />
           <Route path="/Library" element={<ELibrary books={books}/> } />
           <Route path="/Collection" element={<Collection />}/>
           <Route path="/account" element={ <Account />}/>
+
           {/* <Route path="/settings" element={<Settings />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>
+    // <Login />
   );
 }

@@ -3,5 +3,8 @@ export const routes : Record<string, string> = {
   '/library': 'Library',
   '/collection': 'Collection',
   '/account': 'Account',
-  '/notifications': 'Notifications'
+  '/notifications': 'Notifications',
+  '/login' : 'Login',
+  '/signup' : 'Sign Up',
+  '/hello1' : "Dashboard"
 };

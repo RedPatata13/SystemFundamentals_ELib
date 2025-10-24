@@ -9,3 +9,9 @@ export interface EBook {
 export interface LayoutContext {
   setTitle: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export interface User {
+  uid: string;
+  passwordHash: string;
+}
+
